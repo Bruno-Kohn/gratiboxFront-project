@@ -1,5 +1,4 @@
 import homeImage from '../images/gratibox_home.png';
-//import homeImageMobile from '../images/gratibox_home_mobile.png';
 import styled from 'styled-components';
 
 export default function Home() {
@@ -30,15 +29,16 @@ const Container = styled.div`
   img {
     width: 100vw;
     height: 100vh;
+    object-fit: cover;
   }
 `;
 
 const TopBox = styled.div`
-  width: 25vw;
+  width: 400px;
   height: 20vh;
   position: fixed;
   top: 0;
-  left: calc(50vw - (25vw / 2));
+  left: calc(50vw - (400px / 2));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +48,7 @@ const TopBox = styled.div`
   h1 {
     font-size: 28px;
     margin-bottom: 30px;
+    text-align: center;
     color: #fff;
   }
 
@@ -56,14 +57,18 @@ const TopBox = styled.div`
     text-align: center;
     color: #fff;
   }
+
+  @media (max-width: 880px) {
+    top: 20px;
+  }
 `;
 
 const BottomBox = styled.div`
-  width: 25vw;
+  width: 400px;
   height: 20vh;
   position: fixed;
   bottom: 0;
-  left: calc(50vw - (25vw / 2));
+  left: calc(50vw - (400px / 2));
   display: flex;
   flex-direction: column;
   align-items: center;
