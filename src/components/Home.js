@@ -5,7 +5,7 @@ import {
   BottomBox,
   ToStartButton,
   AlreadyThankfulButton,
-} from '../styles/homeStyle.js';
+} from '../styles/HomeStyle.js';
 
 export default function Home() {
   return (
