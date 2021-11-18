@@ -4,6 +4,7 @@ import './styles/reset.css';
 import Home from './components/Home.js';
 import Login from './components/Login.js';
 import Signup from './components/Signup.js';
+import Plans from './components/Plans.js';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path='/' element={<Home />} exact />
         <Route path='/login' element={<Login />} exact />
         <Route path='/signup' element={<Signup />} exact />
+        <Route path='/plans' element={<Plans />} exact />
       </Routes>
     </BrowserRouter>
   );

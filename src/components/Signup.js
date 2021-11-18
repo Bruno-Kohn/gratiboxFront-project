@@ -22,7 +22,6 @@ export default function Signup() {
             <FormButton type='submit'>Cadastrar</FormButton>
           </form>
         </ContainerForm>
-
         <BottomText>Já tem um cadastro? Entre agora!</BottomText>
       </Holder>
     </Container>
