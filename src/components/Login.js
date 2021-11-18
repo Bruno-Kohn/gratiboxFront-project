@@ -3,7 +3,7 @@ import {
   Holder,
   TopMessage,
   ContainerForm,
-  InputLogin,
+  InputForms,
   FormButton,
   BottomText,
 } from '../styles/RegistrationStyles.js';
@@ -15,8 +15,8 @@ export default function Login() {
         <TopMessage>Bem vindo ao GratiBox</TopMessage>
         <ContainerForm>
           <form>
-            <InputLogin type='email' placeholder='E-mail' />
-            <InputLogin type='password' placeholder='Senha' />
+            <InputForms type='email' placeholder='E-mail' />
+            <InputForms type='password' placeholder='Senha' />
             <FormButton type='submit'>Login</FormButton>
           </form>
         </ContainerForm>

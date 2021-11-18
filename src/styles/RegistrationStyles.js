@@ -27,7 +27,7 @@ const ContainerForm = styled.div`
   text-align: center;
 `;
 
-const InputLogin = styled.input`
+const InputForms = styled.input`
   width: 326px;
   height: 64px;
   border-radius: 10px;
@@ -69,7 +69,7 @@ export {
   Holder,
   TopMessage,
   ContainerForm,
-  InputLogin,
+  InputForms,
   FormButton,
   BottomText,
 };

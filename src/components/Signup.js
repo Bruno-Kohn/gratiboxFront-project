@@ -3,10 +3,11 @@ import {
   Holder,
   TopMessage,
   ContainerForm,
-  InputLogin,
+  InputForms,
   FormButton,
   BottomText,
 } from '../styles/RegistrationStyles.js';
+import { Link } from 'react-router-dom';
 
 export default function Signup() {
   return (
@@ -15,14 +16,16 @@ export default function Signup() {
         <TopMessage>Bem vindo ao GratiBox</TopMessage>
         <ContainerForm>
           <form>
-            <InputLogin type='text' placeholder='Nome' />
-            <InputLogin type='email' placeholder='E-mail' />
-            <InputLogin type='password' placeholder='Senha' />
-            <InputLogin type='password' placeholder='Confirmar senha' />
+            <InputForms type='text' placeholder='Nome' />
+            <InputForms type='email' placeholder='E-mail' />
+            <InputForms type='password' placeholder='Senha' />
+            <InputForms type='password' placeholder='Confirmar senha' />
             <FormButton type='submit'>Cadastrar</FormButton>
           </form>
         </ContainerForm>
-        <BottomText>Já tem um cadastro? Entre agora!</BottomText>
+        <Link to='/login'>
+          <BottomText>Já tem um cadastro? Entre agora!</BottomText>
+        </Link>
       </Holder>
     </Container>
   );
