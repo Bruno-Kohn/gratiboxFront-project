@@ -6,6 +6,7 @@ import {
   ToStartButton,
   AlreadyThankfulButton,
 } from '../styles/HomeStyle.js';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   return (
@@ -19,8 +20,12 @@ export default function Home() {
         </h2>
       </TopBox>
       <BottomBox>
-        <ToStartButton>Quero começar</ToStartButton>
-        <AlreadyThankfulButton>Já sou grato</AlreadyThankfulButton>
+        <Link to='/signup'>
+          <ToStartButton>Quero começar</ToStartButton>
+        </Link>
+        <Link to='/login'>
+          <AlreadyThankfulButton>Já sou grato</AlreadyThankfulButton>
+        </Link>
       </BottomBox>
     </Container>
   );
