@@ -11,11 +11,15 @@ export default function App() {
   const loginUser = JSON.parse(localStorage.getItem('loginUser'));
   const [userData, setUserData] = useState('');
 
-  useEffect(() => {
-    if (loginUser) {
-      setUserData(loginUser);
-    }
-  }, []);
+  useEffect(
+    () => {
+      if (loginUser) {
+        setUserData(loginUser);
+      }
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   return (
     <UserContext.Provider value={{ userData, setUserData }}>

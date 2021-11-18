@@ -55,6 +55,7 @@ export default function Signup() {
             <InputForms
               type='text'
               placeholder='Nome'
+              pattern='.{3,}'
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={clicked}
@@ -69,6 +70,7 @@ export default function Signup() {
             <InputForms
               type='password'
               placeholder='Senha'
+              pattern='.{6,20}'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={clicked}
@@ -76,6 +78,7 @@ export default function Signup() {
             <InputForms
               type='password'
               placeholder='Confirmar senha'
+              pattern='.{6,20}'
               value={passwordConfirmation}
               onChange={(e) => setPasswordConfirmation(e.target.value)}
               disabled={clicked}

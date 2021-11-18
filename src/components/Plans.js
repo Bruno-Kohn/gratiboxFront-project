@@ -6,12 +6,17 @@ import {
   ToSignPlanButton,
 } from '../styles/PlansStyle.js';
 import PlanImage from '../images/plans_image.png';
+import { useContext } from 'react';
+import UserContext from '../contexts/UserContext.js';
 
 export default function Plans() {
+  const { userData } = useContext(UserContext);
+  const userName = userData.name.replace(' ', '').toLowerCase();
+
   return (
     <Container>
       <TopMessage>
-        <h1>Bom te ver por aqui, @User</h1>
+        <h1>Bom te ver por aqui, @{userName}</h1>
         <h2>Você ainda não assinou um plano, que tal começar agora?</h2>
       </TopMessage>
       <BottomBox>

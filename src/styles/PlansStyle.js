@@ -35,7 +35,7 @@ const BottomBox = styled.div`
   background-color: #e5cdb3;
   margin: 0 10px;
   border-radius: 25px;
-  padding: 30px;
+  padding: 0 30px 30px 30px;
   display: flex;
 
   img {
@@ -83,7 +83,7 @@ const PlanMessage = styled.div`
   @media (max-width: 700px) {
     margin-left: 0px;
     h1 {
-      margin: 30px 0;
+      margin: 10px 0 20px 0;
     }
   }
 `;

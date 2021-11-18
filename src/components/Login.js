@@ -63,7 +63,7 @@ export default function Login() {
             </FormButton>
           </form>
         </ContainerForm>
-        <Link to='/plans'>
+        <Link to='/signup'>
           <BottomText>Ainda não sou grato</BottomText>
         </Link>
       </Holder>
