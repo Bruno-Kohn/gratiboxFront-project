@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
-  height: 100vh;
+  height: auto;
   width: 100vw;
   background-color: #6d7ce4;
-  padding-top: 20px;
+  padding: 20px 0;
 `;
 
 const TopMessage = styled.div`
@@ -33,7 +33,7 @@ const BottomBox = styled.div`
   width: 95vw;
   height: 400px;
   background-color: #e5cdb3;
-  margin: 0 10px;
+  margin: 40px 10px 0 10px;
   border-radius: 25px;
   padding: 0 30px 30px 30px;
   display: flex;
