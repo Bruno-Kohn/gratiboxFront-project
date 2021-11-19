@@ -132,6 +132,98 @@ const NextButton = styled.button`
   margin: 20px auto 0 auto;
 `;
 
+const Primary = styled.input`
+  width: 100%;
+  height: 44px;
+  background-color: rgba(224, 209, 237, 0.62);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #4d65a8;
+  padding-left: 10px;
+  border: none;
+  margin-bottom: 10px;
+
+  ::placeholder {
+    color: #4d65a8;
+  }
+`;
+
+const SecundaryBox = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+`;
+
+const SecundaryCity = styled.input`
+  width: 60%;
+  height: 44px;
+  background-color: green;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(224, 209, 237, 0.62);
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #4d65a8;
+  padding-left: 10px;
+
+  ::placeholder {
+    color: #4d65a8;
+  }
+`;
+
+const StateBox = styled.div`
+  width: 37%;
+  height: auto;
+  border-radius: 5px;
+  background-color: rgba(224, 209, 237, 0.62);
+  margin-bottom: 10px;
+`;
+
+const SecundaryState = styled.div`
+  width: 100%;
+  height: 44px;
+  background-color: blue;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(224, 209, 237, 0.62);
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: #4d65a8;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const DropChoiceInfo = styled.div`
+  width: 100%;
+  height: 170px;
+  border-radius: 5px;
+  background-color: rgb(224, 209, 237);
+  padding: 5px;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
+  flex-direction: column;
+  overflow: scroll;
+
+  h1 {
+    margin-left: 5px;
+    font-size: 18px;
+    color: #4d65a8;
+  }
+`;
+
+const State = styled.div`
+  width: 100%;
+  height: auto;
+  margin: 3px 0;
+`;
+
 export {
   Container,
   Message,
@@ -141,4 +233,11 @@ export {
   Choice,
   ChoiceBox,
   BottomBox,
+  Primary,
+  SecundaryBox,
+  SecundaryCity,
+  StateBox,
+  SecundaryState,
+  DropChoiceInfo,
+  State,
 };
