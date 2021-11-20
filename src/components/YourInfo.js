@@ -14,10 +14,14 @@ import {
 import PlanChoice from '../images/plan_choice.jpg';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; //useNavigate
 
 export default function YourInfo() {
+  //const navigate = useNavigate();
   const [drop, setDrop] = useState(false);
+  //const [name, setName] = useState('');
+  //const [endereco, setEndereco] = useState('');
+  //const [cep, setCep] = useState('');
   const siglas = [
     'AC',
     'AL',
@@ -48,6 +52,15 @@ export default function YourInfo() {
     'TO',
   ];
 
+  /*function toSendInfo(ev) {
+    ev.preventDefault();
+    const body = { name, endereco, cep };
+
+    tryToSendInfo(body).then(() => {
+      navigate('/details');
+    });
+  }*/
+
   return (
     <Container>
       <TopMessage />
@@ -77,14 +90,16 @@ export default function YourInfo() {
               </DropChoiceInfo>
             </StateBox>
           </SecundaryBox>
+          <Link
+            style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+            to='/details'
+          >
+            <NextButton bottom='-70px' type='submit'>
+              Finalizar
+            </NextButton>
+          </Link>
         </form>
       </BottomBox>
-      <Link
-        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-        to='/details'
-      >
-        <NextButton>Finalizar</NextButton>
-      </Link>
     </Container>
   );
 }

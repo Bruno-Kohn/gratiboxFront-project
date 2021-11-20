@@ -8,7 +8,7 @@ export default function TopMessage() {
 
   return (
     <Message>
-      <h1>Bom te ver por aqui, {userName} 🙂</h1>
+      <h1>Bom te ver por aqui, {userName}. 🙂</h1>
       <h2>“Agradecer é arte de atrair coisas boas”</h2>
     </Message>
   );

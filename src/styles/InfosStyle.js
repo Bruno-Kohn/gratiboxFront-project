@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { BsCheck2 } from 'react-icons/bs';
 
 const Container = styled.div`
   width: 100vw;
   min-height: 100vh;
   background-color: #6d7ce4;
-  padding: 20px 0;
+  padding: 20px 0 90px 0;
   display: flex;
   flex-direction: column;
 `;
@@ -40,6 +41,7 @@ const BottomBox = styled.div`
   padding: 0 20px 10px 20px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   img {
     width: 28%;
@@ -129,7 +131,17 @@ const NextButton = styled.button`
   color: #ffffff;
   font-weight: bold;
   font-size: 25px;
-  margin: 20px auto 0 auto;
+  position: absolute;
+  bottom: ${(props) => props.bottom};
+  left: calc(50% - (202px / 2));
+  box-shadow: inset 0 0 0 0 #ece2f4;
+  transition: ease-out 0.3s;
+  outline: none;
+
+  :hover {
+    box-shadow: inset 202px 0 0 0 #ece2f4;
+    color: #6d7ce4;
+  }
 `;
 
 const Primary = styled.input`
@@ -224,6 +236,63 @@ const State = styled.div`
   margin: 3px 0;
 `;
 
+const DetailsBox = styled.div`
+  width: 100%;
+  height: auto;
+`;
+
+const DetailsInfo = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 18px;
+
+  h1 {
+    color: #4d65a8;
+  }
+
+  h2 {
+    color: #c70452;
+  }
+`;
+
+const Path = styled.div`
+  width: 100%;
+  height: 70px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const PathButton = styled.button`
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #8c97ea;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 25px;
+`;
+
+const CheckBox = styled.div`
+  background-color: #fff;
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const MarkCheck = styled(BsCheck2)`
+  opacity: ${(props) => (props.clicked ? 1 : 0)};
+`;
+
 export {
   Container,
   Message,
@@ -240,4 +309,10 @@ export {
   SecundaryState,
   DropChoiceInfo,
   State,
+  DetailsBox,
+  DetailsInfo,
+  Path,
+  PathButton,
+  CheckBox,
+  MarkCheck,
 };

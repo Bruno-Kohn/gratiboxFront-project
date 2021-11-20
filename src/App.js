@@ -7,6 +7,7 @@ import Signup from './components/Signup.js';
 import Plans from './components/Plans.js';
 import SignAPlan from './components/SignAPlan.js';
 import YourInfo from './components/YourInfo.js';
+import Details from './components/Details.js';
 import UserContext from './contexts/UserContext.js';
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
           <Route path='/plans' element={<Plans />} exact />
           <Route path='/sign-a-plan' element={<SignAPlan />} exact />
           <Route path='/your-info' element={<YourInfo />} exact />
+          <Route path='/details' element={<Details />} exact />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

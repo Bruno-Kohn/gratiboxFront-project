@@ -31,7 +31,7 @@ export default function SignAPlan() {
     },
     {
       title: 'Quero Receber',
-      option: ['Chás', 'Incensos', 'rodutos orgânicos'],
+      option: ['Chás', 'Incensos', 'Produtos orgânicos'],
       drop: dropProducts,
     },
   ];
@@ -77,13 +77,13 @@ export default function SignAPlan() {
             </DropChoice>
           </ChoiceBox>
         ))}
+        <Link
+          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
+          to='/your-info'
+        >
+          <NextButton bottom='-70px'>Próximo</NextButton>
+        </Link>
       </BottomBox>
-      <Link
-        style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-        to='/your-info'
-      >
-        <NextButton>Próximo</NextButton>
-      </Link>
     </Container>
   );
 }
