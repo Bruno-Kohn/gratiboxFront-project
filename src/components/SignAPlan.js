@@ -18,6 +18,11 @@ export default function SignAPlan() {
   const [dropPlan, setDropPlan] = useState(true);
   const [dropDelivery, setDropDelivery] = useState(false);
   const [dropProducts, setDropProducts] = useState(false);
+  const [radioPlan, setRadioPlan] = useState('Semanal');
+  const [radioDay, setRadioDay] = useState('Segunda');
+  const [isCheckedCha, setIsCheckedCha] = useState(false);
+  const [isCheckedIncensos, setIsCheckedIncensos] = useState(false);
+  const [isCheckedProdutos, setIsCheckedProdutos] = useState(false);
   const choice = [
     {
       title: 'Plano',
@@ -36,6 +41,14 @@ export default function SignAPlan() {
     },
   ];
 
+  console.log(radioPlan);
+  console.log(radioDay);
+  console.log({
+    Cha: isCheckedCha,
+    Incenso: isCheckedIncensos,
+    Produto: isCheckedProdutos,
+  });
+
   return (
     <Container>
       <TopMessage />
@@ -44,7 +57,7 @@ export default function SignAPlan() {
         {choice.map((i, key) => (
           <ChoiceBox key={key}>
             <Choice>
-              <h1>{i.title}</h1>
+              <h1>{i.title}</h1>{' '}
               {i.drop ? (
                 <BsArrowUp
                   onClick={() =>
@@ -68,15 +81,66 @@ export default function SignAPlan() {
               )}
             </Choice>
             <DropChoice visible={i.drop}>
-              {i.option.map((i, key) => (
-                <Box key={key}>
-                  <Check />
-                  <h1>{i}</h1>
-                </Box>
-              ))}
+              {i.title !== 'Quero Receber' ? (
+                i.option.map((j, key) => (
+                  <Box key={key}>
+                    <input
+                      type='radio'
+                      checked={
+                        i.title === 'Plano' ? radioPlan === j : radioDay === j
+                      }
+                      value={j}
+                      onChange={(e) => {
+                        i.title === 'Plano'
+                          ? setRadioPlan(e.target.value)
+                          : setRadioDay(e.target.value);
+                      }}
+                    />
+                    <label>{j} </label>
+                    <br />
+                  </Box>
+                ))
+              ) : (
+                <>
+                  <Box>
+                    <input
+                      type='checkbox'
+                      checked={isCheckedCha}
+                      onChange={(e) => {
+                        setIsCheckedCha(e.target.checked);
+                      }}
+                    />
+                    <label>Chas</label>
+                    <br />
+                  </Box>
+                  <Box>
+                    <input
+                      type='checkbox'
+                      checked={isCheckedIncensos}
+                      onChange={(e) => {
+                        setIsCheckedIncensos(e.target.checked);
+                      }}
+                    />
+                    <label>Incensos</label>
+                    <br />
+                  </Box>
+                  <Box>
+                    <input
+                      type='checkbox'
+                      checked={isCheckedProdutos}
+                      onChange={(e) => {
+                        setIsCheckedProdutos(e.target.checked);
+                      }}
+                    />
+                    <label>Produtos Organicos</label>
+                    <br />
+                  </Box>
+                </>
+              )}
             </DropChoice>
           </ChoiceBox>
         ))}
+
         <Link
           style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
           to='/your-info'
