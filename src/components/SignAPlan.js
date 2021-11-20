@@ -1,9 +1,8 @@
 import TopMessage from './TopMessage.js';
 import PlanChoice from '../images/plan_choice.jpg';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
-import Check from './Check.js';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Container,
   Box,
@@ -15,6 +14,7 @@ import {
 } from '../styles/InfosStyle.js';
 
 export default function SignAPlan() {
+  const navigate = useNavigate();
   const [dropPlan, setDropPlan] = useState(true);
   const [dropDelivery, setDropDelivery] = useState(false);
   const [dropProducts, setDropProducts] = useState(false);
@@ -23,23 +23,10 @@ export default function SignAPlan() {
   const [isCheckedCha, setIsCheckedCha] = useState(false);
   const [isCheckedIncensos, setIsCheckedIncensos] = useState(false);
   const [isCheckedProdutos, setIsCheckedProdutos] = useState(false);
-  const choice = [
-    {
-      title: 'Plano',
-      option: ['Mensal', 'Semanal'],
-      drop: dropPlan,
-    },
-    {
-      title: 'Entrega',
-      option: ['Segunda', 'Quarta', 'Sexta', 'Dia 01', 'Dia 10', 'Dia 20'],
-      drop: dropDelivery,
-    },
-    {
-      title: 'Quero Receber',
-      option: ['Chás', 'Incensos', 'Produtos orgânicos'],
-      drop: dropProducts,
-    },
-  ];
+
+  const plan = ['Mensal', 'Semanal'];
+  const deliveryMonthly = ['Dia 01', 'Dia 10', 'Dia 20'];
+  const deliveryWeekly = ['Segunda', 'Quarta', 'Sexta'];
 
   console.log(radioPlan);
   console.log(radioDay);
@@ -49,104 +36,144 @@ export default function SignAPlan() {
     Produto: isCheckedProdutos,
   });
 
+  function toSubmitPlanInfo() {
+    if (!isCheckedCha && !isCheckedIncensos && !isCheckedProdutos) {
+      return alert('Você deve escolher ao menos uma opção dos produtos');
+    }
+    navigate('/your-info');
+  }
+
   return (
     <Container>
       <TopMessage />
       <BottomBox>
         <img src={PlanChoice} alt='plan' />
-        {choice.map((i, key) => (
-          <ChoiceBox key={key}>
+        <ChoiceBox>
+          <Choice>
+            <h1>Plano</h1>
+            {dropPlan ? (
+              <BsArrowUp onClick={() => setDropPlan(!dropPlan)} />
+            ) : (
+              <BsArrowDown onClick={() => setDropPlan(!dropPlan)} />
+            )}
+          </Choice>
+          <DropChoice visible={dropPlan}>
+            {plan.map((i) => (
+              <Box>
+                <input
+                  type='radio'
+                  checked={radioPlan === i}
+                  value={i}
+                  onChange={(e) => {
+                    setRadioPlan(e.target.value);
+                    i === 'Mensal'
+                      ? setRadioDay('Dia 01')
+                      : setRadioDay('Segunda');
+                  }}
+                />
+                <label>{i}</label>
+              </Box>
+            ))}
+          </DropChoice>
+        </ChoiceBox>
+        {radioPlan === 'Mensal' ? (
+          <ChoiceBox>
             <Choice>
-              <h1>{i.title}</h1>{' '}
-              {i.drop ? (
-                <BsArrowUp
-                  onClick={() =>
-                    i.title === 'Plano'
-                      ? setDropPlan(!dropPlan)
-                      : i.title === 'Entrega'
-                      ? setDropDelivery(!dropDelivery)
-                      : setDropProducts(!dropProducts)
-                  }
-                />
+              <h1>Entrega</h1>
+              {dropDelivery ? (
+                <BsArrowUp onClick={() => setDropDelivery(!dropDelivery)} />
               ) : (
-                <BsArrowDown
-                  onClick={() =>
-                    i.title === 'Plano'
-                      ? setDropPlan(!dropPlan)
-                      : i.title === 'Entrega'
-                      ? setDropDelivery(!dropDelivery)
-                      : setDropProducts(!dropProducts)
-                  }
-                />
+                <BsArrowDown onClick={() => setDropDelivery(!dropDelivery)} />
               )}
             </Choice>
-            <DropChoice visible={i.drop}>
-              {i.title !== 'Quero Receber' ? (
-                i.option.map((j, key) => (
-                  <Box key={key}>
-                    <input
-                      type='radio'
-                      checked={
-                        i.title === 'Plano' ? radioPlan === j : radioDay === j
-                      }
-                      value={j}
-                      onChange={(e) => {
-                        i.title === 'Plano'
-                          ? setRadioPlan(e.target.value)
-                          : setRadioDay(e.target.value);
-                      }}
-                    />
-                    <label>{j} </label>
-                    <br />
-                  </Box>
-                ))
-              ) : (
-                <>
-                  <Box>
-                    <input
-                      type='checkbox'
-                      checked={isCheckedCha}
-                      onChange={(e) => {
-                        setIsCheckedCha(e.target.checked);
-                      }}
-                    />
-                    <label>Chas</label>
-                    <br />
-                  </Box>
-                  <Box>
-                    <input
-                      type='checkbox'
-                      checked={isCheckedIncensos}
-                      onChange={(e) => {
-                        setIsCheckedIncensos(e.target.checked);
-                      }}
-                    />
-                    <label>Incensos</label>
-                    <br />
-                  </Box>
-                  <Box>
-                    <input
-                      type='checkbox'
-                      checked={isCheckedProdutos}
-                      onChange={(e) => {
-                        setIsCheckedProdutos(e.target.checked);
-                      }}
-                    />
-                    <label>Produtos Organicos</label>
-                    <br />
-                  </Box>
-                </>
-              )}
+            <DropChoice visible={dropDelivery}>
+              {deliveryMonthly.map((i) => (
+                <Box>
+                  <input
+                    type='radio'
+                    checked={radioDay === i}
+                    value={i}
+                    onChange={(e) => {
+                      setRadioDay(e.target.value);
+                    }}
+                  />
+                  <label>{i}</label>
+                </Box>
+              ))}
             </DropChoice>
           </ChoiceBox>
-        ))}
-
-        <Link
-          style={{ width: '100%', display: 'flex', justifyContent: 'center' }}
-          to='/your-info'
-        >
-          <NextButton bottom='-70px'>Próximo</NextButton>
-        </Link>
+        ) : (
+          <ChoiceBox>
+            <Choice>
+              <h1>Entrega</h1>
+              {dropDelivery ? (
+                <BsArrowUp onClick={() => setDropDelivery(!dropDelivery)} />
+              ) : (
+                <BsArrowDown onClick={() => setDropDelivery(!dropDelivery)} />
+              )}
+            </Choice>
+            <DropChoice visible={dropDelivery}>
+              {deliveryWeekly.map((i) => (
+                <Box>
+                  <input
+                    type='radio'
+                    checked={radioDay === i}
+                    value={i}
+                    onChange={(e) => {
+                      setRadioDay(e.target.value);
+                    }}
+                  />
+                  <label>{i}</label>
+                </Box>
+              ))}
+            </DropChoice>
+          </ChoiceBox>
+        )}
+        <ChoiceBox>
+          <Choice>
+            <h1>Quero Receber</h1>
+            {dropProducts ? (
+              <BsArrowUp onClick={() => setDropProducts(!dropProducts)} />
+            ) : (
+              <BsArrowDown onClick={() => setDropProducts(!dropProducts)} />
+            )}
+          </Choice>
+          <DropChoice visible={dropProducts}>
+            <Box>
+              <input
+                type='checkbox'
+                checked={isCheckedCha}
+                onChange={(e) => {
+                  setIsCheckedCha(e.target.checked);
+                }}
+              />
+              <label>Chás</label>
+            </Box>
+            <Box>
+              <input
+                type='checkbox'
+                checked={isCheckedIncensos}
+                onChange={(e) => {
+                  setIsCheckedIncensos(e.target.checked);
+                }}
+              />
+              <label>Incensos</label>
+            </Box>
+            <Box>
+              <input
+                type='checkbox'
+                checked={isCheckedProdutos}
+                onChange={(e) => {
+                  setIsCheckedProdutos(e.target.checked);
+                }}
+              />
+              <label>Produtos orgânicos</label>
+            </Box>
+          </DropChoice>
+        </ChoiceBox>
+        <NextButton bottom='-70px' onClick={() => toSubmitPlanInfo()}>
+          Próximo
+        </NextButton>
       </BottomBox>
     </Container>
   );
