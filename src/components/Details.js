@@ -13,7 +13,7 @@ import { useContext } from 'react';
 import UserContext from '../contexts/UserContext.js';
 
 export default function Details() {
-  const { setUserData } = useContext(UserContext);
+  const { setUserData, order } = useContext(UserContext);
   const reqBack = [
     {
       info: 'Plano',
@@ -32,6 +32,7 @@ export default function Details() {
       infoback: ' Vem do back',
     },
   ];
+  console.log(order);
 
   function logout() {
     localStorage.removeItem('loginUser');

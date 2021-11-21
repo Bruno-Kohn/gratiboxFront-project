@@ -10,6 +10,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { trySignup } from '../services/api.service.js';
+import Loader from 'react-loader-spinner';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -84,7 +85,11 @@ export default function Signup() {
               disabled={clicked}
             />
             <FormButton type='submit' disabled={clicked}>
-              Cadastrar
+              {clicked === false ? (
+                'Cadastrar'
+              ) : (
+                <Loader type='ThreeDots' color='#FFF' height={35} width={60} />
+              )}
             </FormButton>
           </form>
         </ContainerForm>

@@ -13,6 +13,7 @@ import UserContext from './contexts/UserContext.js';
 export default function App() {
   const loginUser = JSON.parse(localStorage.getItem('loginUser'));
   const [userData, setUserData] = useState('');
+  const [order, setOrder] = useState('');
 
   useEffect(
     () => {
@@ -25,7 +26,7 @@ export default function App() {
   );
 
   return (
-    <UserContext.Provider value={{ userData, setUserData }}>
+    <UserContext.Provider value={{ userData, setUserData, order, setOrder }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} exact />

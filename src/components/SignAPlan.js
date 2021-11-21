@@ -1,7 +1,7 @@
 import TopMessage from './TopMessage.js';
 import PlanChoice from '../images/plan_choice.jpg';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -12,9 +12,11 @@ import {
   ChoiceBox,
   BottomBox,
 } from '../styles/InfosStyle.js';
+import UserContext from '../contexts/UserContext.js';
 
 export default function SignAPlan() {
   const navigate = useNavigate();
+  const { setOrder } = useContext(UserContext);
   const [dropPlan, setDropPlan] = useState(true);
   const [dropDelivery, setDropDelivery] = useState(false);
   const [dropProducts, setDropProducts] = useState(false);
@@ -40,6 +42,15 @@ export default function SignAPlan() {
     if (!isCheckedCha && !isCheckedIncensos && !isCheckedProdutos) {
       return alert('Você deve escolher ao menos uma opção dos produtos');
     }
+    const planInfo = {
+      radioPlan,
+      radioDay,
+      Cha: isCheckedCha,
+      Incenso: isCheckedIncensos,
+      Produto: isCheckedProdutos,
+    };
+
+    setOrder(planInfo);
     navigate('/your-info');
   }
 

@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import UserContext from '../contexts/UserContext.js';
 import { tryLogin } from '../services/api.service.js';
+import Loader from 'react-loader-spinner';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -59,7 +60,11 @@ export default function Login() {
               disabled={clicked}
             />
             <FormButton type='submit' disabled={clicked}>
-              Login
+              {clicked === false ? (
+                'Login'
+              ) : (
+                <Loader type='ThreeDots' color='#FFF' height={35} width={60} />
+              )}
             </FormButton>
           </form>
         </ContainerForm>

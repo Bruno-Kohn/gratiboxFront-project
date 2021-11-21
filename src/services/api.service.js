@@ -9,4 +9,8 @@ function tryLogin(user) {
   return axios.post(`${URL}/login`, user);
 }
 
-export { trySignup, tryLogin };
+function tryToSignAPlan(planInfo) {
+  return axios.post(`${URL}/sign-a-plan`, planInfo);
+}
+
+export { trySignup, tryLogin, tryToSignAPlan };
