@@ -56,7 +56,6 @@ export default function YourInfo() {
     'SE',
     'TO',
   ];
-  console.log(order, 'aaaaa');
 
   function sendDetails() {
     if (
@@ -72,8 +71,7 @@ export default function YourInfo() {
       return alert('CEP preenchido incorretamente, favor verifique');
     }
     setOrder({ ...order, nome: name, endereco, cep, cidade, estado });
-    console.log(order, 'bbbbb');
-    tryToSignAPlan(order)
+    tryToSignAPlan({ ...order, nome: name, endereco, cep, cidade, estado })
       .then((resp) => {
         navigate('/details');
       })

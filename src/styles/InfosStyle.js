@@ -244,7 +244,6 @@ const DetailsBox = styled.div`
 const DetailsInfo = styled.div`
   width: 100%;
   height: auto;
-  display: flex;
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 18px;
@@ -252,10 +251,12 @@ const DetailsInfo = styled.div`
   h1 {
     color: #4d65a8;
   }
+`;
 
-  h2 {
-    color: #c70452;
-  }
+const Prods = styled.div`
+  color: #c70452;
+  font-weight: bold;
+  font-size: 18px;
 `;
 
 const Path = styled.div`
@@ -315,4 +316,5 @@ export {
   PathButton,
   CheckBox,
   MarkCheck,
+  Prods,
 };

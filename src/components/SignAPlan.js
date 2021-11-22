@@ -1,7 +1,7 @@
 import TopMessage from './TopMessage.js';
 import PlanChoice from '../images/plan_choice.jpg';
 import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -13,6 +13,7 @@ import {
   BottomBox,
 } from '../styles/InfosStyle.js';
 import UserContext from '../contexts/UserContext.js';
+import { tryToGetInfos } from '../services/api.service.js';
 
 export default function SignAPlan() {
   const navigate = useNavigate();
@@ -21,29 +22,37 @@ export default function SignAPlan() {
   const [dropDelivery, setDropDelivery] = useState(false);
   const [dropProducts, setDropProducts] = useState(false);
   const [radioPlan, setRadioPlan] = useState('Semanal');
-  const [radioDay, setRadioDay] = useState('Segunda');
+  const [radioDay, setRadioDay] = useState(1);
   const [isCheckedCha, setIsCheckedCha] = useState(false);
   const [isCheckedIncensos, setIsCheckedIncensos] = useState(false);
   const [isCheckedProdutos, setIsCheckedProdutos] = useState(false);
+  const [deliveryMonthly, setDeliveryMonthly] = useState([]);
+  const [deliveryWeekly, setDeliveryWeekly] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  useEffect(
+    () => {
+      tryToGetInfos()
+        .then((resp) => {
+          setDeliveryWeekly(resp.data.days.rows.slice(0, 3));
+          setDeliveryMonthly(resp.data.days.rows.slice(3, 6));
+          setProducts(resp.data.products.rows);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    // eslint-disable-next-line
+    []
+  );
 
   const plan = ['Mensal', 'Semanal'];
-  const deliveryMonthly = ['Dia 01', 'Dia 10', 'Dia 20'];
-  const deliveryWeekly = ['Segunda', 'Quarta', 'Sexta'];
-
-  console.log(radioPlan);
-  console.log(radioDay);
-  console.log({
-    Cha: isCheckedCha,
-    Incenso: isCheckedIncensos,
-    Produto: isCheckedProdutos,
-  });
 
   function toSubmitPlanInfo() {
     if (!isCheckedCha && !isCheckedIncensos && !isCheckedProdutos) {
       return alert('Você deve escolher ao menos uma opção dos produtos');
     }
     const planInfo = {
-      radioPlan,
       radioDay,
       Cha: isCheckedCha,
       Incenso: isCheckedIncensos,
@@ -77,9 +86,7 @@ export default function SignAPlan() {
                   value={i}
                   onChange={(e) => {
                     setRadioPlan(e.target.value);
-                    i === 'Mensal'
-                      ? setRadioDay('Dia 01')
-                      : setRadioDay('Segunda');
+                    i === 'Mensal' ? setRadioDay(4) : setRadioDay(1);
                   }}
                 />
                 <label>{i}</label>
@@ -102,13 +109,13 @@ export default function SignAPlan() {
                 <Box>
                   <input
                     type='radio'
-                    checked={radioDay === i}
-                    value={i}
+                    checked={radioDay === Number(i.id)}
+                    value={Number(i.id)}
                     onChange={(e) => {
-                      setRadioDay(e.target.value);
+                      setRadioDay(Number(e.target.value));
                     }}
                   />
-                  <label>{i}</label>
+                  <label>{i.delivery_name}</label>
                 </Box>
               ))}
             </DropChoice>
@@ -128,13 +135,13 @@ export default function SignAPlan() {
                 <Box>
                   <input
                     type='radio'
-                    checked={radioDay === i}
-                    value={i}
+                    checked={radioDay === Number(i.id)}
+                    value={Number(i.id)}
                     onChange={(e) => {
-                      setRadioDay(e.target.value);
+                      setRadioDay(Number(e.target.value));
                     }}
                   />
-                  <label>{i}</label>
+                  <label>{i.delivery_name}</label>
                 </Box>
               ))}
             </DropChoice>
@@ -158,7 +165,7 @@ export default function SignAPlan() {
                   setIsCheckedCha(e.target.checked);
                 }}
               />
-              <label>Chás</label>
+              <label>{products[0]?.product_name}</label>
             </Box>
             <Box>
               <input
@@ -168,7 +175,7 @@ export default function SignAPlan() {
                   setIsCheckedIncensos(e.target.checked);
                 }}
               />
-              <label>Incensos</label>
+              <label>{products[1]?.product_name}</label>
             </Box>
             <Box>
               <input
@@ -178,7 +185,7 @@ export default function SignAPlan() {
                   setIsCheckedProdutos(e.target.checked);
                 }}
               />
-              <label>Produtos orgânicos</label>
+              <label>{products[2]?.product_name}</label>
             </Box>
           </DropChoice>
         </ChoiceBox>
